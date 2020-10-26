@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div style="min-height: 90vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                "
+    >
+    <img style="width: 20px;"src="https://vectorified.com/images/green-check-icon-2.png" alt="success">
+    <h3 style="color: gray;
+               font-weight: 300;
+               font-family: Arial, Helvetica, sans-serif;
+               margin-left: 5px;
+              ">Account confirmed!</h3>  
+  </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+      window.onload = function() {
+        var socket = io("http://localhost:3000");
+
+        window.socket = socket;
+        socket.on("SERVER:NEW_MESSAGE", function(msg) {
+          if (window.user !== msg.user) {
+            console.log(msg);
+          }
+        });
+      };
+    </script>
+  </body>
+</html>
