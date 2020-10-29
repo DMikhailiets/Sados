@@ -1,7 +1,7 @@
 import { verifyJWTToken } from "../utils"
 
 export default (req: any, res: any, next: any) => {
-    if (req.path === "/user/login" || req.path === "/user/registration" || req.path ==="/pizza" ) {
+    if (req.path === "/user/login" || req.path === "/user/registration") {
         return next()
     }
     const token = req.headers.token
@@ -11,9 +11,6 @@ export default (req: any, res: any, next: any) => {
         next()
     })
     .catch(err => {
-        if(req.path === "/order" && !token){
-            return next()
-        }
         res.status(403).json({ message: "Invalid auth token provided." })
     })
 }

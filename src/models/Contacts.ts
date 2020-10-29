@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface IVacancy extends Document {
+export interface IContacts extends Document {
     phone_number: {
         type: string
         require: boolean
@@ -15,7 +15,7 @@ export interface IVacancy extends Document {
     }
 }
 
-const VacancySchema = new Schema(
+const ContactsSchema = new Schema(
     {
         phone_number: { type: String, require: Boolean },
         email: { type: String, require: Boolean },
@@ -26,6 +26,6 @@ const VacancySchema = new Schema(
     }
 )
 
-const VacancyModel = mongoose.model<IVacancy>("Vacancy", VacancySchema)
+const ContactsModel = mongoose.model<IContacts>("Contacts", ContactsSchema)
 
-export default VacancyModel
+export default ContactsModel

@@ -9,10 +9,7 @@ export interface ITechnic extends Document {
         type: string
         require: boolean
     }
-    params: {
-        type: string
-        require: boolean
-    }
+    params: []
 }
 
 const ArticleSchema = new Schema(

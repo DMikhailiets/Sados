@@ -18,10 +18,10 @@ const UserSchema = new Schema(
             validate: [isEmail, "Invalid email"],
             unique: true
         },
-        username: {
-            type: String,
-            required: "Username is required"
-        },
+        // fullname: {
+        //     type: String,
+        //     required: "Fullname is required"
+        // },
         password: {
             type: String,
             required: "Password is required"
