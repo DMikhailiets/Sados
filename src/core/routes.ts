@@ -3,7 +3,7 @@ import express from "express"
 import { checkAuth } from "../middleware"
 import { loginValidation, registerValidation } from "../utils/validations"
 import cors from 'cors'
-import { UserCtrl, AboutCompanyCtrl, ContactsCtrl, VacancyCtrl } from "../controllers"
+import { UserCtrl, AboutCompanyCtrl, ContactsCtrl, VacancyCtrl, MetaTagsCtrl } from "../controllers"
 
 
 var corsOptions = {
@@ -16,6 +16,7 @@ const createRoutes = (app: express.Express) => {
     const VacancyController = new VacancyCtrl()
     const ContactsController = new ContactsCtrl()
     const AboutCompanyController = new AboutCompanyCtrl()
+    const MetaTagsController = new MetaTagsCtrl()
 
     app.use(cors())
     app.use(bodyParser.json())
@@ -41,6 +42,11 @@ const createRoutes = (app: express.Express) => {
     app.post('/aboutCompany', cors(corsOptions),AboutCompanyController.create)
     app.put('/aboutCompany', cors(corsOptions),AboutCompanyController.update)
     app.delete('/aboutCompany', cors(corsOptions),AboutCompanyController.delete)
+
+    app.get('/metaTags', cors(corsOptions),MetaTagsController.get)
+    app.post('/metaTags', cors(corsOptions),MetaTagsController.create)
+    app.put('/metaTags', cors(corsOptions),MetaTagsController.update)
+    app.delete('/metaTags', cors(corsOptions),MetaTagsController.delete)
 }
 
 export default createRoutes
