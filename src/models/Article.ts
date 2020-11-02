@@ -5,10 +5,6 @@ export interface IArticle extends Document {
         type: string
         require: boolean
     }
-    description: {
-        type: string
-        require: boolean
-    }
     body: {
         type: string
         require: boolean
@@ -18,7 +14,6 @@ export interface IArticle extends Document {
 const ArticleSchema = new Schema(
     {
         title: { type: String, require: Boolean },
-        description: { type: String, require: Boolean },
         body: { type: String, require: Boolean },
     },
     {

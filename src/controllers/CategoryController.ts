@@ -1,17 +1,16 @@
 import express from "express"
-import { validationResult } from "express-validator"
-import { ContactsModel } from "../models"
-import { createJWTToken } from "../utils"
+import { CategoryModel } from "../models"
 
-class ContactsController {
+
+class CategoryController {
 
     create = (req: express.Request, res: express.Response) => {
         const postData = {
-            phone_number: req.body.phone_number,
-            email: req.body.email,
-            adress: req.body.adress
+            title: req.body.title,
+            description: req.body.description,
+            photoUrl: req.body.photoUrl
         }
-        const contacts = new ContactsModel(postData)
+        const contacts = new CategoryModel(postData)
         contacts
         .save()
         .then((obj: any) => {
@@ -25,14 +24,14 @@ class ContactsController {
     update = (req: express.Request, res: express.Response) => {
         const id: string = req.body.id
         const postData = {
-            phone_number: req.body.phone_number,
-            email: req.body.email,
-            adress: req.body.adress
+            title: req.body.title,
+            description: req.body.description,
+            photoUrl: req.body.photoUrl
         }
-        ContactsModel.findByIdAndUpdate(id, postData, (err, contacts) => {
+        CategoryModel.findByIdAndUpdate(id, postData, (err, category) => {
                 if (err) {
                     return res.status(404).json({
-                    message: "Contact not found"
+                    message: "Category not found"
                     })
                 }
                     res.json(postData)
@@ -41,31 +40,32 @@ class ContactsController {
 
     delete = (req: express.Request, res: express.Response) => {
         const id: string = req.body.id
-        ContactsModel.findOneAndRemove({ _id: id })
+        CategoryModel.findOneAndRemove({ _id: id })
         .then(user => {
             if (user) {
                 res.json({
-                    message: `Contact deleted`
+                    message: `Category deleted`
+                })
+            } else {
+                res.json({
+                    message: `Category not found`
                 })
             }
         })
         .catch(() => {
             res.json({
-                message: `Contact not found`
+                message: `Contacts not found`
             })
         })
     }
     get = (req: express.Request, res: express.Response) => {
-        ContactsModel.find({}, (err, contacts) => {
+        CategoryModel.find({}, (err, category) => {
             if (err) {
                 return res.status(404).json()
             }
-            res.json(contacts)
+            res.json(category)
         })
     }
-
-    
-
 }
 
-export default ContactsController
+export default CategoryController

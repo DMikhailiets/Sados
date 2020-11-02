@@ -1,18 +1,16 @@
 import express from "express"
-import { validationResult } from "express-validator"
-import { ContactsModel } from "../models"
-import { createJWTToken } from "../utils"
+import { ArticleModel } from "../models"
 
-class ContactsController {
+
+class ArticleController {
 
     create = (req: express.Request, res: express.Response) => {
         const postData = {
-            phone_number: req.body.phone_number,
-            email: req.body.email,
-            adress: req.body.adress
+            title: req.body.title,
+            body: req.body.body,
         }
-        const contacts = new ContactsModel(postData)
-        contacts
+        const article = new ArticleModel(postData)
+        article
         .save()
         .then((obj: any) => {
             res.json(obj)
@@ -25,14 +23,13 @@ class ContactsController {
     update = (req: express.Request, res: express.Response) => {
         const id: string = req.body.id
         const postData = {
-            phone_number: req.body.phone_number,
-            email: req.body.email,
-            adress: req.body.adress
+            title: req.body.title,
+            body: req.body.body,
         }
-        ContactsModel.findByIdAndUpdate(id, postData, (err, contacts) => {
+        ArticleModel.findByIdAndUpdate(id, postData, (err, category) => {
                 if (err) {
                     return res.status(404).json({
-                    message: "Contact not found"
+                    message: "Article not found"
                     })
                 }
                     res.json(postData)
@@ -41,31 +38,32 @@ class ContactsController {
 
     delete = (req: express.Request, res: express.Response) => {
         const id: string = req.body.id
-        ContactsModel.findOneAndRemove({ _id: id })
+        ArticleModel.findOneAndRemove({ _id: id })
         .then(user => {
             if (user) {
                 res.json({
-                    message: `Contact deleted`
+                    message: `Article deleted`
+                })
+            } else {
+                res.json({
+                    message: `Article not found`
                 })
             }
         })
         .catch(() => {
             res.json({
-                message: `Contact not found`
+                message: `Article not found`
             })
         })
     }
     get = (req: express.Request, res: express.Response) => {
-        ContactsModel.find({}, (err, contacts) => {
+        ArticleModel.find({}, (err, article) => {
             if (err) {
                 return res.status(404).json()
             }
-            res.json(contacts)
+            res.json(article)
         })
     }
-
-    
-
 }
 
-export default ContactsController
+export default ArticleController

@@ -9,20 +9,35 @@ export interface ITechnic extends Document {
         type: string
         require: boolean
     }
-    params: []
+    photoUrl: {
+        type: string
+        require: boolean
+    }
+    params: Array<{
+        param: {
+            type: string
+            require: boolean
+        },
+        value: {
+            type: string
+            require: boolean
+        }
+    }>
 }
 
-const ArticleSchema = new Schema(
+const TechnicSchema = new Schema(
     {
         title: { type: String, require: Boolean },
         description: { type: String, require: Boolean },
-        body: { type: String, require: Boolean },
+        photoUrl: { type: String, require: Boolean },
+        params: { type: Array, require: Boolean },
+        
     },
     {
         timestamps: true
     }
 )
 
-const ArticleModel = mongoose.model<ITechnic>("Article", ArticleSchema)
+const TechnicModel = mongoose.model<ITechnic>("Technik", TechnicSchema)
 
-export default ArticleModel
+export default TechnicModel

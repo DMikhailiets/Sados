@@ -1,18 +1,17 @@
 import express from "express"
-import { validationResult } from "express-validator"
-import { ContactsModel } from "../models"
-import { createJWTToken } from "../utils"
+import { TechnicModel } from "../models"
 
-class ContactsController {
 
+class Technics {
     create = (req: express.Request, res: express.Response) => {
         const postData = {
-            phone_number: req.body.phone_number,
-            email: req.body.email,
-            adress: req.body.adress
+            title: req.body.title,
+            description: req.body.description,
+            photoUrl: req.body.photoUrl,
+            params: req.body.params
         }
-        const contacts = new ContactsModel(postData)
-        contacts
+        const technic = new TechnicModel(postData)
+        technic
         .save()
         .then((obj: any) => {
             res.json(obj)
@@ -25,14 +24,15 @@ class ContactsController {
     update = (req: express.Request, res: express.Response) => {
         const id: string = req.body.id
         const postData = {
-            phone_number: req.body.phone_number,
-            email: req.body.email,
-            adress: req.body.adress
+            title: req.body.title,
+            description: req.body.description,
+            photoUrl: req.body.photoUrl,
+            params: req.body.params
         }
-        ContactsModel.findByIdAndUpdate(id, postData, (err, contacts) => {
+        TechnicModel.findByIdAndUpdate(id, postData, (err) => {
                 if (err) {
                     return res.status(404).json({
-                    message: "Contact not found"
+                    message: "Technic not found"
                     })
                 }
                     res.json(postData)
@@ -41,31 +41,28 @@ class ContactsController {
 
     delete = (req: express.Request, res: express.Response) => {
         const id: string = req.body.id
-        ContactsModel.findOneAndRemove({ _id: id })
-        .then(user => {
-            if (user) {
+        TechnicModel.findOneAndRemove({ _id: id })
+        .then(page => {
+            if (page) {
                 res.json({
-                    message: `Contact deleted`
+                    message: `Technic was deleted`
                 })
             }
         })
         .catch(() => {
             res.json({
-                message: `Contact not found`
+                message: `technic not found`
             })
         })
     }
     get = (req: express.Request, res: express.Response) => {
-        ContactsModel.find({}, (err, contacts) => {
+        TechnicModel.find({}, (err, technics) => {
             if (err) {
                 return res.status(404).json()
             }
-            res.json(contacts)
+            res.json(technics)
         })
     }
-
-    
-
 }
 
-export default ContactsController
+export default Technics

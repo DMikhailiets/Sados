@@ -3,7 +3,7 @@ import express from "express"
 import { checkAuth } from "../middleware"
 import { loginValidation, registerValidation } from "../utils/validations"
 import cors from 'cors'
-import { UserCtrl, AboutCompanyCtrl, ContactsCtrl, VacancyCtrl, MetaTagsCtrl } from "../controllers"
+import { UserCtrl, AboutCompanyCtrl, ArticleCtrl, CategoryCtrl, ContactsCtrl, VacancyCtrl, MetaTagsCtrl, TechnicsCtrl } from "../controllers"
 
 
 var corsOptions = {
@@ -17,6 +17,9 @@ const createRoutes = (app: express.Express) => {
     const ContactsController = new ContactsCtrl()
     const AboutCompanyController = new AboutCompanyCtrl()
     const MetaTagsController = new MetaTagsCtrl()
+    const TechnicsController = new TechnicsCtrl()
+    const CategoryCjntroller = new CategoryCtrl()
+    const ArticleController = new ArticleCtrl()
 
     app.use(cors())
     app.use(bodyParser.json())
@@ -47,6 +50,21 @@ const createRoutes = (app: express.Express) => {
     app.post('/metaTags', cors(corsOptions),MetaTagsController.create)
     app.put('/metaTags', cors(corsOptions),MetaTagsController.update)
     app.delete('/metaTags', cors(corsOptions),MetaTagsController.delete)
+
+    app.get('/technic', cors(corsOptions),TechnicsController.get)
+    app.post('/technic', cors(corsOptions),TechnicsController.create)
+    app.put('/technic', cors(corsOptions),TechnicsController.update)
+    app.delete('/technic', cors(corsOptions),TechnicsController.delete)
+
+    app.get('/category', cors(corsOptions),CategoryCjntroller.get)
+    app.post('/category', cors(corsOptions),CategoryCjntroller.create)
+    app.put('/category', cors(corsOptions),CategoryCjntroller.update)
+    app.delete('/category', cors(corsOptions),CategoryCjntroller.delete)
+
+    app.get('/articles', cors(corsOptions),ArticleController.get)
+    app.post('/articles', cors(corsOptions),ArticleController.create)
+    app.put('/articles', cors(corsOptions),ArticleController.update)
+    app.delete('/articles', cors(corsOptions),ArticleController.delete)
 }
 
 export default createRoutes
