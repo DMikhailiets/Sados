@@ -52,7 +52,7 @@ class ArticleController {
         })
         .catch(() => {
             res.json({
-                message: `Article not found`
+                message: `Article was not deleted`
             })
         })
     }

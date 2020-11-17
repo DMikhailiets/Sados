@@ -1,7 +1,7 @@
 import { verifyJWTToken } from "../utils"
 
 export default (req: any, res: any, next: any) => {
-    if (req.path === "/user/login" || req.path === "/user/registration") {
+    if (req.path === "/API/user/login" || req.path === "/API/user/registration") {
         return next()
     }
     const token = req.headers.token

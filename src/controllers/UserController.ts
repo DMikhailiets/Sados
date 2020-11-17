@@ -7,6 +7,7 @@ import { createJWTToken } from "../utils"
 class UserController {
 
     show = (req: express.Request, res: express.Response) => {
+        console.log(req.url)
         const id: string = req.params.id
         UserModel.findById(id, (err, user) => {
         if (err) {
@@ -56,11 +57,15 @@ class UserController {
                 res.json({
                     message: `User ${user.fullname} deleted`
                 })
+            } else {
+                res.json({
+                    message: `User ${user.fullname} not found`
+                })
             }
         })
         .catch(() => {
             res.json({
-                message: `User not found`
+                message: `User ${user.fullname} was not deleted`
             })
         })
     }

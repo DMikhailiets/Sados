@@ -43,11 +43,15 @@ class AboutCompany {
                 res.json({
                     message: `Page was deleted`
                 })
+            }{
+                res.json({
+                    message: `Page not found`
+                })
             }
         })
         .catch(() => {
             res.json({
-                message: `Page not found`
+                message: `Page was not deleted`
             })
         })
     }

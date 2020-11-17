@@ -54,7 +54,7 @@ class CategoryController {
         })
         .catch(() => {
             res.json({
-                message: `Contacts not found`
+                message: `Contacts was not deleted`
             })
         })
     }

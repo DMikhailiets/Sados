@@ -47,11 +47,15 @@ class ContactsController {
                 res.json({
                     message: `Contact deleted`
                 })
+            } else {
+                res.json({
+                    message: `Contact not found`
+                })
             }
         })
         .catch(() => {
             res.json({
-                message: `Contact not found`
+                message: `Contact was not deleted`
             })
         })
     }

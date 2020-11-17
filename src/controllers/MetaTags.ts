@@ -44,11 +44,15 @@ class MetaTagsController {
                 res.json({
                     message: `Metatag was deleted`
                 })
+            } else {
+                res.json({
+                    message: `Metatag not found`
+                })
             }
         })
         .catch(() => {
             res.json({
-                message: `Metatag not found`
+                message: `Metatag was not deleted`
             })
         })
     }

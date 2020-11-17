@@ -47,11 +47,15 @@ class Technics {
                 res.json({
                     message: `Technic was deleted`
                 })
+            } else {
+                res.json({
+                    message: `Techic not found`
+                })
             }
         })
         .catch(() => {
             res.json({
-                message: `technic not found`
+                message: `Technic was not deleted`
             })
         })
     }
