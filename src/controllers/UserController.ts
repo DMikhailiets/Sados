@@ -55,17 +55,17 @@ class UserController {
         .then(user => {
             if (user) {
                 res.json({
-                    message: `User ${user.fullname} deleted`
+                    message: `User was deleted`
                 })
             } else {
                 res.json({
-                    message: `User ${user.fullname} not found`
+                    message: `User not found`
                 })
             }
         })
         .catch(() => {
             res.json({
-                message: `User ${user.fullname} was not deleted`
+                message: `User was not deleted`
             })
         })
     }
