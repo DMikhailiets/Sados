@@ -29,13 +29,14 @@ class CategoryController {
             photoUrl: req.body.photoUrl
         }
         CategoryModel.findByIdAndUpdate(id, postData, (err, category) => {
-                if (err) {
-                    return res.status(404).json({
-                    message: "Category not found"
-                    })
-                }
-                    res.json(postData)
+            if (err) {
+                return res.status(404).json({
+                message: "Category not found"
                 })
+            }else {
+                return res.json('Category was updated')
+            }   
+        })
     }
 
     delete = (req: express.Request, res: express.Response) => {

@@ -22,12 +22,13 @@ class UserController {
     getMe = (req: any, res: express.Response) => {
         const id: string = req.user._id
         UserModel.findById(id, (err, user) => {
-        if (err) {
-            return res.status(404).json({
-            message: "User not found"
-            })
-        }
-            res.json(user)
+            if (err) {
+                return res.status(404).json({
+                message: "User not found"
+                })
+            } else {
+                return res.json('Page was updated')
+            }   
         })
     }
 

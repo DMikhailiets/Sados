@@ -27,13 +27,14 @@ class ArticleController {
             body: req.body.body,
         }
         ArticleModel.findByIdAndUpdate(id, postData, (err, category) => {
-                if (err) {
-                    return res.status(404).json({
-                    message: "Article not found"
-                    })
-                }
-                    res.json(postData)
+            if (err) {
+                return res.status(404).json({
+                message: "Article not found"
                 })
+            }else {
+                return res.json('Article was updated')
+            }   
+        })
     }
 
     delete = (req: express.Request, res: express.Response) => {

@@ -30,13 +30,14 @@ class Technics {
             params: req.body.params
         }
         TechnicModel.findByIdAndUpdate(id, postData, (err) => {
-                if (err) {
-                    return res.status(404).json({
-                    message: "Technic not found"
-                    })
-                }
-                    res.json(postData)
+            if (err) {
+                return res.status(404).json({
+                message: "Technic not found"
                 })
+            }else {
+                return res.json('Technic was updated')
+            }   
+        })
     }
 
     delete = (req: express.Request, res: express.Response) => {

@@ -31,13 +31,14 @@ class VacancyController {
             salary: req.body.salary
         }    
         VacancyModel.findByIdAndUpdate(id, postData, (err) => {
-                if (err) {
-                    return res.status(404).json({
-                    message: "Vacancy not found"
-                    })
-                }
-                    res.json(postData)
+            if (err) {
+                return res.status(404).json({
+                message: "Vacancy not found"
                 })
+            } else {
+                return res.json('Vacancy was updated')
+            }   
+        })
     }
 
     delete = (req: express.Request, res: express.Response) => {
@@ -48,11 +49,15 @@ class VacancyController {
                 res.json({
                     message: `Vacancy was deleted`
                 })
+            } else {
+                res.json({
+                    message: `Vacancy not found`
+                })
             }
         })
         .catch(() => {
             res.json({
-                message: `Vacancy not found`
+                message: `Vacancy was not deleted`
             })
         })
     }

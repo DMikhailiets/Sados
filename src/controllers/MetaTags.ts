@@ -27,13 +27,14 @@ class MetaTagsController {
             context: req.body.context,
         }
         MetaTagModel.findByIdAndUpdate(id, postData, (err) => {
-                if (err) {
-                    return res.status(404).json({
-                    message: "Metatag not found"
-                    })
-                }
-                    res.json(postData)
+            if (err) {
+                return res.status(404).json({
+                message: "Metatag not found"
                 })
+            }else {
+                return res.json('Metatag was updated')
+            }   
+        })
     }
 
     delete = (req: express.Request, res: express.Response) => {

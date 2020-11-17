@@ -30,13 +30,14 @@ class ContactsController {
             adress: req.body.adress
         }
         ContactsModel.findByIdAndUpdate(id, postData, (err, contacts) => {
-                if (err) {
-                    return res.status(404).json({
-                    message: "Contact not found"
-                    })
-                }
-                    res.json(postData)
+            if (err) {
+                return res.status(404).json({
+                message: "Contact not found"
                 })
+            } else {
+                return res.json('Contact was updated')
+            }      
+        })
     }
 
     delete = (req: express.Request, res: express.Response) => {
